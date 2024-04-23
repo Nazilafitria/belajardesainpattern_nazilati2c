@@ -1,130 +1,66 @@
-interface QuackBehavior {
-        void quack();
-}
-
-interface FlyBehavior {
-        void fly();
-}
-
-class Quack implements QuackBehavior {
-        public void quack() {
-                System.out.println("Qwek - Qwek");
+abstract class Duck {
+        void quack(){
+                System.out.println("Qwek Qwek");
         }
-}
 
-class Squeak implements QuackBehavior {
-        public void quack() {
-                System.out.println("Squeak");
+        void swim(){
+                System.out.println("Berenang");
         }
-}
 
-class MuteQuack implements QuackBehavior {
-        public void quack() {
-                System.out.println("Tidak Bisa Bersuara");
-        }
-}
+        abstract void display();
 
-
-class FlyWithWings implements FlyBehavior {
-        public void fly() {
+        void fly(){
                 System.out.println("Terbang");
         }
 }
 
-class FlyNoWay implements FlyBehavior {
-        public void fly() {
-                System.out.println("Tidak bisa terbang");
-        }
-}
-
-class FlyWithRocketPower implements FlyBehavior {
-
-        @Override
-        public void fly() {
-                System.out.println("Cool, terbang menggunakan rocket");
-        }
-}
-
-abstract class Duck {
-        QuackBehavior quackBehavior;
-        FlyBehavior flyBehavior;
-
-        abstract void display();
-
-        void swim() {
-                System.out.println("Berenang");
-        }
-
-        void performQuack() {
-                quackBehavior.quack();
-        }
-
-        void performFly() {
-                flyBehavior.fly();
-        }
-
-        void setFlyBehavior(FlyBehavior fb) {
-                flyBehavior = fb;
-        }
-        void setQuackBehavior(QuackBehavior qb) {
-                quackBehavior = qb;
-        }
-}
-
-class MallardDuck extends Duck {
-        public MallardDuck() {
-                quackBehavior = new Quack();
-                flyBehavior = new FlyWithWings();
-        }
-
+class MallardDuck extends Duck{
         @Override
         void display() {
                 System.out.println("Tampilan MallardDuck");
         }
 }
 
-class RedheadDuck extends Duck {
-        public RedheadDuck() {
-                quackBehavior = new Quack();
-                flyBehavior = new FlyWithWings();
-        }
-
+class RedHeadDuck extends Duck{
         @Override
         void display() {
-                System.out.println("Tampilan ReadHeadDuck");
+                System.out.println("Tampilan RedHeadDuck");
         }
 }
 
-class RubberDuck extends Duck {
-        public RubberDuck() {
-                quackBehavior = new Squeak();
-                flyBehavior = new FlyNoWay();
+class RubberDuck extends Duck{
+        @Override
+        void display() {
+                System.out.println("Tampilan RubberDuck");
+        }
+        @Override
+        void quack() {
+                System.out.println("Bunyinya squeek, bukan qwak");
         }
 
-        void display () {
-                System.out.println("Tampilan RubberDuck");
+        @Override
+        void fly() {
+                // Tidak ada implementasi, karena bebek mainan tidak dapat terbang
         }
 }
 
 class WoodenDuck extends Duck {
-        public WoodenDuck() {
-                quackBehavior = new Quack();
-                flyBehavior = new FlyNoWay();
-        }
-
-        void display () {
+        @Override
+        void display() {
                 System.out.println("Tampilan WoodenDuck");
         }
-}
-
-class ModelDuck extends Duck {
-        ModelDuck(){
-                flyBehavior = new FlyNoWay();
-                quackBehavior = new Quack();
+        @Override
+        void quack(){
+                // Tidak ada implementasi, karena bebek mainan tidak dapat bersuara
         }
 
         @Override
-        void display() {
-                System.out.println("Tampilan ModelDuck");
+        void swim(){
+                System.out.println("Mengambang");
+        }
+
+        @Override
+        void fly(){
+                // Tidak ada implementasi, karena bebek mainan tidak dapat terbang
         }
 }
